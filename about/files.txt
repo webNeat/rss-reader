@@ -1,0 +1,18 @@
+console/ # the console app
+  main # the entry point of the console app
+  rss-fetch # get rss feeds from an url and save them into data json files
+src/ # classe files
+  orm/
+    Connection # extends PDO
+    Mapper # persist & remove
+    Finder # finds ...
+    Model # class of one record
+  models/
+    Channel # extends Model
+    Item # extends Model
+config.php
+bootstrap.php
+web/
+  index.php
+vendor/
+  ...

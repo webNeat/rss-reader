@@ -1,0 +1,3 @@
+Utilisation de classe statiques utilitaires ? ( ex: String )
+Utilisation de la method get_class et du ReflectionObject ?
+Validations au niveau des Models ?

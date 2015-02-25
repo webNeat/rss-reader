@@ -1,0 +1,29 @@
+#!/usr/bin/env php
+<?php
+use rss\models\Item;
+
+require __DIR__.'/../bootstrap.php';
+
+// Insertion
+$item = new Item;
+$item->name = 'Test Value';
+echo 'Before Insertion: '; var_dump($item);
+$mapper->persist($item);
+echo 'After Insertion: '; var_dump($item);
+
+// Reading
+$item = $itemsFinder->get($item->id);
+echo 'When Reading: '; var_dump($item);
+
+// Update
+$item->name = 'New Value';
+$mapper->persist($item);
+$item = $itemsFinder->get($item->id);
+echo 'After Update: '; var_dump($item);
+
+// Remove
+$mapper->remove($item);
+if(is_null($itemsFinder->get($item->id)))
+	echo 'Removed successfuly !' . PHP_EOL;
+else
+	echo 'Was not removed at all !' . PHP_EOL;
