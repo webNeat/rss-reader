@@ -1,0 +1,23 @@
+{% extends layout %}{% block title %} New Category {% endblock %}
+{% block header %} <h1>New Category</h1> {% endblock %}
+{% block content %}
+<form class="form-horizontal" role="form" action="/categories/" method="post">
+  <div class="form-group">
+    <label for="lastname" class="col-sm-2 control-label">Name</label>
+    <div class="col-sm-10">
+      <input id="name" type="text" class="form-control" name="name" placeholder="Category Name">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="firstname" class="col-sm-2 control-label">Description</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" name="description" placeholder="Summary about this category">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button id="submit" type="submit" class="btn btn-success"> Add </button>
+    </div>
+  </div>
+</form>
+{% endblock %}

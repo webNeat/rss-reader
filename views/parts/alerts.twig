@@ -1,0 +1,26 @@
+{% if alerts.errors | length > 0 %}
+    <div class="alert alert-dismissible alert-warning">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+        {% for error in alerts.errors %}
+            <p> {{ error }} </p>
+        {% endfor %}
+    </div>
+{% endif %}
+
+{% if alerts.infos | length > 0 %}
+    <div class="alert alert-dismissible alert-info">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+        {% for info in alerts.infos %}
+            <p> {{ info }} </p>
+        {% endfor %}
+    </div>
+{% endif %}
+
+{% if alerts.success | length > 0 %}
+    <div class="alert alert-dismissible alert-success">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+        {% for success in alerts.success %}
+            <p> {{ success }} </p>
+        {% endfor %}
+    </div>
+{% endif %}

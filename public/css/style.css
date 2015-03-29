@@ -1,0 +1,12 @@
+#itemsTable tbody tr.summary {
+	cursor: pointer;
+}
+#itemsTable tbody tr.details {
+	display: none;
+}
+#itemsTable tbody tr.new {
+	background: #fff
+}
+#itemsTable tbody tr.old {
+	background: #ddd
+}
