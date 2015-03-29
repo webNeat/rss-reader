@@ -1,2 +1,4 @@
 vendor/
 .idea/
+rss-reader.sublime-project
+composer.lock
