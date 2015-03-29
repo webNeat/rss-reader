@@ -30,4 +30,21 @@ L'application we offre un API REST qui accèpte les paramètres sous les deux fo
 ### 4.1. Les tests unitaires
 Les tests unitaires ont été fait par le framwork PHPUnit. La couche model et La classe `Fetcher` (sous laquelle se base le worker) ont été testées. Le fichier `phpunit.xml` contient des variables de configuration de la base de données sur laquelle les tests vont être lancés.
 ### 4.2. Les tests fonctionnelles
-Pour les tests fonctionnelles on a utilisé le framwork Behat.
+Pour les tests fonctionnelles on voullait utiliser le framework Behat avec l'extention Mink pour simuler le navigateur. Mais on n'a pas abouti !
+
+# Etapes de l'installation
+
+1. Créer deux bases de données MySQL (une est pour les tests) et importer le fichier `database.sql`
+
+2. Changer les fichiers `config.php` et `phpunit.xml`
+
+3. Télécharger les dépendences : `composer install`
+
+4. Créer un cron job qui lance le script `worker` chaque 30 minutes ou lancer le script `run`
+
+5. Se déplacer dans le dossier `/public` et lancer la commande `php -S localhost:8080`
+
+6. Accéder à l'application par le lien `http://localhost:8080/`
+
+# Remarque
+- Deux exemples de flux rss seront dans les liens http://localhost:8080/demo/rss.xml et http://localhost:8080/demo/atom.xml

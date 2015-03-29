@@ -16,6 +16,11 @@
         "twig/twig": "~1.18",
         "silex/silex": "~1.2",
         "phpunit/phpunit": "4.5.*",
+        "behat/behat": "*",
+        "behat/mink": "*",
+        "behat/mink-extension": "*",
+        "behat/mink-goutte-driver": "*",
+        "behat/mink-selenium2-driver": "*",
         "willdurand/negotiation": "1.3.4",
         "symfony/twig-bridge": "~2.6",
         "symfony/validator": "~2.6",
@@ -26,5 +31,8 @@
             "rss\\": "src/",
             "tests\\": "test/"
         }
+    },
+    "config": {
+        "bin-dir": "bin/"
     }
 }
