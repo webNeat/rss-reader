@@ -1,0 +1,18 @@
+<phpunit bootstrap="vendor/autoload.php" verbose="true" colors="false">
+	<php>
+		<!-- Tesing Database Configuration -->
+		<var name="DB_DRIVER" value="mysql" />
+		<var name="DB_HOST" value="localhost" />
+		<var name="DB_USER" value="root" />
+		<var name="DB_PASS" value="00" />
+		<var name="DB_NAME" value="rssreader-test" />
+    </php>
+	<testsuites>
+		<testsuite name="ORM Test Suite">
+			<directory>test/unit/orm</directory>
+		</testsuite>
+		<testsuite name="Fetcher Test Suite">
+			<file>test/unit/FetcherTest.php</file>
+		</testsuite>
+	</testsuites>
+</phpunit>
