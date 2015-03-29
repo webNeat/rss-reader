@@ -1,0 +1,6 @@
+#!/usr/bin/env php
+<?php
+while(true){
+	shell_exec(__DIR__.'/worker');
+	sleep(1800); // 30 mins
+}

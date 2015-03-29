@@ -1,12 +1,21 @@
 #!/usr/bin/env php
 <?php
 use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Output\StreamOutput;
+use Symfony\Component\Console\Input\ArrayInput;
 use rss\worker\commands\FetchCommand;
 use rss\worker\commands\FetchAllCommand;
 
 require __DIR__.'/bootstrap.php';
 
+$logFile   = __DIR__.'/logs/commands.log';
+$handle = fopen($logFile, 'w+');
+$output = new StreamOutput($handle);
+
 $application = new Application();
 $application->add(new FetchCommand($mapper, $channelsFinder, $itemsFinder));
 $application->add(new FetchAllCommand($channelsFinder));
-$application->run();
+$application->setDefaultCommand('fetch-all');
+$application->run(null, $output);
+
+fclose($handle);

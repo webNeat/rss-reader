@@ -1,1 +1,33 @@
-# rss-reader
+# RSS Reader
+## 1. Couche Model
+### 1.1. ORM
+Les 3 classes principales de cette couche sont :
+
+- `Schema`: A partir d'une `Connection`, cette classe scanne les tables de la base de données et stock les champs de chaque table et ses relations avec les autres tables. Elle se base sur la convention qu'un champs nommé "foo_id" est une clé étrangère sur la table "foo".
+
+- `Mapper`: peut persister ou supprimer toute classe qui hérite de `Model` avec ses relations (Persister une `Channel` persistera aussi les `Item`s associés)
+
+- `Finder`: Cette classe prend parmi les paramètres du constructeur la classe model correspondante et donne une instance qui peut lire ce model avec ces relations avec des fonctionnalités de tri (sortBy()) et de filtrage (where()). Le nombre maximal des recurrences à faire pour lire les models associés est paramètrable, il est par défaut à 1 (Seulement l'entité et les entités directement associées sont lus).
+
+### 1.2. Les classes models
+Elles héritent de `Model` est respèctent les conventions suivants:
+
+- Le nom de la classe en Capital CamlCase correspond au nom de la table en Underscores (Item => item, FeedElement => feed_element)
+
+- Les attributs sont publiques, leurs noms en camlCase correspond aux noms des champs de la table en Underscores.
+
+- Des attributs sont ajoutés pour les entités reliés portant les mêmes noms des classes avec un 's' s'il s'agit d'une collection ( `Channel` possède un attribut $category et un attribut $items )
+
+## 2. le Worker
+Symfony Console Component a été utilisé dans cette couche avec des classes qui font le mapping entre la structrue XML de RSS et Atom et les classes models. Pour ne pas dupliquer les items, un test du hash md5 du fichier est fait au début, puis les links sont verifiés. Le choix du link comme identifiant a été fait car c'est le seul champ obligatoire dans les deux standards RSS et Atom.
+
+## 3. Couche présentation
+Cette couche utilise Silex avec Twig pour le templating et Monolog pour les fichiers du log. Au niveau client on a utilisé la bibliothèque jQuery pour faire les appels Ajax ( pour pouvoir envoyer des requètes PUT et DELETE ) et aussi Bootstrap pour le CSS.
+
+L'application we offre un API REST qui accèpte les paramètres sous les deux formats `application/x-www-form-urlencoded` et `application/json`. Il s'adapte à la requète en lisant le champ `Accept` de la requète et produisant la réponse sous format HTML ou JSON.
+
+## 4. Les tests
+### 4.1. Les tests unitaires
+Les tests unitaires ont été fait par le framwork PHPUnit. La couche model et La classe `Fetcher` (sous laquelle se base le worker) ont été testées. Le fichier `phpunit.xml` contient des variables de configuration de la base de données sur laquelle les tests vont être lancés.
+### 4.2. Les tests fonctionnelles
+Pour les tests fonctionnelles on a utilisé le framwork Behat.
