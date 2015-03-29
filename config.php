@@ -5,5 +5,5 @@ $config = [
 	'db_host' => 'localhost',
 	'db_user' => 'root',
 	'db_pass' => '00',
-	'db_name' => 'rssreader'
+	'db_name' => 'just'
 ];

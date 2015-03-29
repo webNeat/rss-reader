@@ -28,10 +28,12 @@ class FetchAllCommand extends Command {
     protected function execute(InputInterface $input, OutputInterface $output){
         $channels = $this->channelsFinder->get();
         $command = $this->getApplication()->find('fetch');
-        foreach( $channels as $channel ){
-            $output->writeln('Fetching Feed : ' . $channel->id);
-            $in = new ArrayInput(['command' => 'fetch', 'id' => $channel->id]);
-            $command->run($in, $output);
+        if(is_array($channels)) {
+            foreach( $channels as $channel ){
+                $output->writeln('Fetching Feed : ' . $channel->id);
+                $in = new ArrayInput(['command' => 'fetch', 'id' => $channel->id]);
+                $command->run($in, $output);
+            }            
         }
     }
 

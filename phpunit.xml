@@ -5,7 +5,7 @@
 		<var name="DB_HOST" value="localhost" />
 		<var name="DB_USER" value="root" />
 		<var name="DB_PASS" value="00" />
-		<var name="DB_NAME" value="rssreader-test" />
+		<var name="DB_NAME" value="just" />
     </php>
 	<testsuites>
 		<testsuite name="ORM Test Suite">
