@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>Atom Simple Feed</title>
+    <subtitle>Atom Feed Sample description</subtitle>
+    <link href="http://atom.sample.com/atom.xml" rel="self" />
+    <link href="http://atom.sample.com" />
+    <updated>2015-03-27T12:30:02Z</updated>
+
+    <entry>
+        <title>Item 1</title>
+        <link href="http://atom.sample.com/item1" />
+        <updated>2015-03-27T16:30:02Z</updated>
+        <content type="xhtml">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+                <p>This is the entry content.</p>
+            </div>
+        </content>
+        <author>
+            <name>Amine</name>
+        </author>
+    </entry>
+
+</feed>

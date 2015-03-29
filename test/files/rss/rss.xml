@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+   <channel>
+      <title>RSS Simple Feed</title>
+      <link>http://rss.sample.com</link>
+      <description>RSS Feed Sample description</description>
+      <pubDate>Fri, 27 Mar 2015 14:00:00 GMT</pubDate>
+      <item>
+         <title>Item 1</title>
+         <link>http://rss.sample.com/item1</link>
+         <description>Item 1 content</description>
+         <pubDate>Fri, 27 Mar 2015 14:00:00 GMT</pubDate>
+      </item>
+   </channel>
+</rss>
