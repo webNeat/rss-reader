@@ -32,6 +32,7 @@ class ChannelsController extends Controller implements ControllerProviderInterfa
 		// channels are updated by the worker
 		$c->delete('/{id}', [ $this, 'delete' ]);
 		$c->get('/{id}/items', [ $this, 'items' ]);
+		$c->get('/{id}/items/all', [ $this, 'allItems' ]);
 		// Additional Routes (for showing forms, only HTML)
 		$c->get('/create', [ $this, 'create' ]);
 		
@@ -39,7 +40,6 @@ class ChannelsController extends Controller implements ControllerProviderInterfa
 	}
 
 	public function index(Request $request){
-		$response = null;
 		$channels = $this->finder->get();
 		return $this->choose( $request, 
 			$this->render('channels/index.twig', [
@@ -155,6 +155,28 @@ class ChannelsController extends Controller implements ControllerProviderInterfa
 	}
 
 	public function items(Request $request, $id){
+		$htmlResponse = null;
+		$jsonResponse = [
+			'done' => false,
+			'errors' => null,
+			'result' => null
+		];
+		$channel = $this->finder->setRecursions(2)->getById($id);
+		if(is_null($channel)){
+			$htmlResponse = $this->app->redirect('/not-found');
+			$jsonResponse['errors'] = ['The channel does not exist !'];
+		} else {
+			$htmlResponse = $this->render('items/index.twig', [
+				'channel' => $channel,
+				'items' => $channel->newItems()
+			]);
+			$jsonResponse['done'] = true;
+			$jsonResponse['result'] = $channel->newItems();
+		}
+		return $this->choose($request, $htmlResponse, $jsonResponse);	
+	}
+
+	public function allItems(Request $request, $id){
 		$htmlResponse = null;
 		$jsonResponse = [
 			'done' => false,

@@ -10,3 +10,13 @@
 #itemsTable tbody tr.old {
 	background: #ddd
 }
+#toggle-items {
+	display: none;
+}
+a.white {
+	color: #fff;
+}
+h1{
+	font-size: 220%;
+	margin-bottom: 20px;
+}

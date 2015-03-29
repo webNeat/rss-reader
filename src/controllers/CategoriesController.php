@@ -29,6 +29,7 @@ class CategoriesController extends Controller implements ControllerProviderInter
 		$c->delete('/{id}', [ $this, 'delete' ]);
 		$c->get('/{id}/channels', [ $this, 'channels' ]);
 		$c->get('/{id}/items', [ $this, 'items' ]);
+		$c->get('/{id}/items/all', [ $this, 'allItems' ]);
 		// Additional Routes (for showing forms, only HTML)
 		$c->get('/create', [ $this, 'create' ]);
 		$c->get('/{id}/edit', [ $this, 'edit' ]);
@@ -218,7 +219,35 @@ class CategoriesController extends Controller implements ControllerProviderInter
 			'errors' => null,
 			'result' => null
 		];
-		$category = $this->finder->setRecursions(2)->getById($id);
+		$category = $this->finder->setRecursions(3)->getById($id);
+		if(is_null($category)){
+			$htmlResponse = $this->app->redirect('/not-found');
+			$jsonResponse['errors'] = ['The category does not exist !'];
+		} else {
+			$items = [];
+			foreach( $category->channels as $c ){
+				$items = array_merge($items, array_filter($c->items, function($i){
+					return ! $i->viewed;
+				}));
+			}
+			$htmlResponse = $this->render('items/index.twig', [
+				'category' => $category,
+				'items' => $items
+			]);
+			$jsonResponse['done'] = true;
+			$jsonResponse['result'] = $items;
+		}
+		return $this->choose($request, $htmlResponse, $jsonResponse);
+	}
+
+	public function allItems(Request $request, $id){
+		$htmlResponse = null;
+		$jsonResponse = [
+			'done' => false,
+			'errors' => null,
+			'result' => null
+		];
+		$category = $this->finder->setRecursions(3)->getById($id);
 		if(is_null($category)){
 			$htmlResponse = $this->app->redirect('/not-found');
 			$jsonResponse['errors'] = ['The category does not exist !'];

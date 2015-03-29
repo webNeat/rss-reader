@@ -31,7 +31,6 @@
     	<div class="container-fluid">
     	  <div class="row">
     	    <div class="col-md-3" id="sidebar">
-    	    	{% include 'parts/sidebar.twig' %}
     	    </div>
     	    <div class="col-md-9" id="content">
                 {% block header %}{% endblock %}
@@ -43,5 +42,8 @@
     	  </div>
     	</div>
         <script src="/js/forms.js"></script>
+        <script>
+            $('#sidebar').load('/sidebar');
+        </script>
     </body>
 </html>

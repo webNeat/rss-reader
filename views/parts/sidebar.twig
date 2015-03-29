@@ -1,0 +1,18 @@
+{% for cat in categories %}
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <span class="badge pull-right">{{ cat.newItemsNumber() }}</span>
+    <a href="/categories/{{cat.id}}/items" class="white"><h3 class="panel-title">{{ cat.name }}</h3></a>
+  </div>
+  <div class="panel-body">
+	<ul class="list-group">
+    {% for c in cat.channels %}
+		<li class="list-group-item">
+			<span class="badge">{{ c.newItems() | length }}</span>
+		    <a href="/channels/{{c.id}}/items"> {{ c.title }} </a>
+		</li>
+    {% endfor %}
+	</ul>
+  </div>
+</div>		
+{% endfor %}

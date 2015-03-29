@@ -7,6 +7,7 @@ $('form.ajax').submit(function(e){
     $.ajax(url, { method: method, data: data })
         .done(function(response){
             $('#content').html(response);
+            $('#sidebar').load('/sidebar');
         })
         .fail(function(){
             $('#alerts').html('<div class="alert alert-dismissible alert-warning"> Some Error occured ! </div>');

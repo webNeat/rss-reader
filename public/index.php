@@ -33,11 +33,20 @@ $app->mount( '/items', new ItemsController($app, $formatNegotiator, $mapper, $it
 $app->get('/', function () use ($app) {
     return $app->redirect('/items');
 });
+$app->get('/sidebar', function() use ($app, $channelsFinder, $categoriesFinder) {
+    $categories = $categoriesFinder->setRecursions(2)->get();
+    $channels = $channelsFinder->get();
+    return $app['twig']->render('parts/sidebar.twig', [
+        'categories' => $categories,
+        'channels' => $channels
+    ]);
+});
 $app->get('/not-found', function() use ($app) {
 	return $app['twig']->render('static/not-found.twig');
 });
 $app->error(function (\Exception $e, $code) {
-    return 'We are sorry, but something went terribly wrong : ( ' . $e->getMessage() . ')';
+    return 'We are sorry, but something went terribly wrong : ( ' . $e->getMessage() . ') <br>'
+        . $e->getTraceAsString();
 });
 
 $app->before(function (Request $request) {

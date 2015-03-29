@@ -15,4 +15,12 @@ class Category extends Model {
 	static public function loadValidatorMetadata(ClassMetadata $metadata){
         $metadata->addPropertyConstraint('name', new Assert\Length(['min' => 4]));
     }
+
+    public function newItemsNumber(){
+    	$n = 0;
+    	foreach ($this->channels as $c){
+    		$n += count($c->newItems());
+    	}
+    	return $n;
+    }
 }
